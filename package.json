@@ -1,0 +1,19 @@
+{
+  "name": "ethereum-react-todo",
+  "version": "1.0.0",
+  "description": "React todo list powered by blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReeceRose/ethereum-react-todo.git"
+  },
+  "author": "Reece Rose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ReeceRose/ethereum-react-todo/issues"
+  },
+  "homepage": "https://github.com/ReeceRose/ethereum-react-todo#readme"
+}
