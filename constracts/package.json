@@ -1,8 +1,8 @@
 {
-  "name": "ethereum-react-todo",
-  "version": "1.0.0",
+  "name": "ethereum-react-todo-contracts",
+  "version": "0.1.0",
   "description": "React todo list powered by blockchain",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
