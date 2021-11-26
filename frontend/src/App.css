@@ -16,3 +16,49 @@
 .App-header {
   color: #61dafb;
 }
+
+.task-input {
+  width: 100%;
+  float: left;
+  padding: 0.5rem 0.75rem;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  border: #666 0.15rem solid;
+}
+
+.task-input:focus,
+.task-input:hover {
+  border: #61dafb 0.15rem solid;
+}
+
+.form-button {
+  border: #666 0.15rem solid;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+  background: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #000;
+}
+
+.form-button:focus,
+.form-button:hover {
+  border: #2295b4 0.15rem solid;
+}
+
+.task {
+  cursor: pointer;
+}
+
+.task-checkbox {
+  background-color: #fff;
+  margin: 0;
+  margin-right: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  border: #666 0.15rem solid;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  cursor: pointer;
+}
