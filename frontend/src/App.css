@@ -62,3 +62,8 @@
   transform: translateY(-0.075em);
   cursor: pointer;
 }
+
+.task-list {
+  width: 33vw;
+  text-align: left;
+}

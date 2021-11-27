@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { ChangeEvent, Component } from "react";
 import Web3 from "web3";
-import "./App.css";
 import { Contract } from "web3-eth-contract";
 
+import "./App.css";
 import { TODO_LIST_ABI, TODO_LIST_ADDRESS } from "./config";
 
 interface Task {
@@ -16,6 +16,7 @@ interface State {
   todoList: Contract | undefined;
   taskCount: number;
   tasks: Task[];
+  content: string;
 }
 
 class App extends Component<{}, State> {
@@ -25,7 +26,13 @@ class App extends Component<{}, State> {
 
   constructor(props: any) {
     super(props);
-    this.state = { account: "", todoList: undefined, taskCount: 0, tasks: [] };
+    this.state = {
+      account: "",
+      todoList: undefined,
+      taskCount: 0,
+      tasks: [],
+      content: "",
+    };
   }
 
   async loadBlockchainData() {
@@ -45,6 +52,40 @@ class App extends Component<{}, State> {
     });
   }
 
+  async createTask() {
+    try {
+      await this.state.todoList?.methods
+        .createTask(this.state.content)
+        .send({ from: this.state.account });
+    } catch (e) {
+      console.log("Failed to create new task", e);
+    }
+    let taskCount = this.state.taskCount + 1;
+    const task: Task = {
+      completed: false,
+      content: this.state.content,
+      id: taskCount.toString(),
+    };
+    this.setState({
+      taskCount: taskCount,
+      tasks: [...this.state.tasks, task],
+    });
+  }
+
+  handleContentChange(e: ChangeEvent<HTMLInputElement>) {
+    this.setState({ content: e.target.value });
+  }
+
+  async toggleTask(id: string) {
+    try {
+      await this.state.todoList?.methods
+        .toggleCompleted(id)
+        .send({ from: this.state.account });
+    } catch (e) {
+      console.log("Failed to toggle task", e);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -58,15 +99,29 @@ class App extends Component<{}, State> {
               className="task-input"
               placeholder="New task"
               required
+              value={this.state.content}
+              onChange={this.handleContentChange.bind(this)}
             />
-            <button className="form-button">Add</button>
+            <button
+              type="button"
+              className="form-button"
+              onClick={this.createTask.bind(this)}
+            >
+              Add
+            </button>
           </form>
           <ul id="taskList" className="task-list">
             <div className="tasktemplate checkbox display-none">
               {this.state.tasks.map((task) => (
                 <label key={task.id} className="task">
-                  <input type="checkbox" className="task-checkbox" />
+                  <input
+                    type="checkbox"
+                    className="task-checkbox"
+                    defaultChecked={task.completed}
+                    onClick={async () => this.toggleTask(task.id)}
+                  />
                   <span className="task-content">{task.content}</span>
+                  <br />
                 </label>
               ))}
             </div>
